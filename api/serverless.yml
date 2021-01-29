@@ -1,0 +1,82 @@
+service: skillssuply
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    stage: prod
+    stackName: ${self:service}-${self:provider.stage}
+    apiName: ${self:service}-${self:provider.stage}
+    region: eu-central-1
+    endpointType: regional
+    memorySize: 256
+    timeout: 21
+    logRetentionInDays: 365
+    httpApi:
+        cors: true
+        payload: '2.0'
+    logs:
+        httpApi: true
+    tracing:
+        lambda: true
+    iamRoleStatements:
+        -
+            Effect: Allow
+            Action: ssm:GetParameter
+            Resource: arn:aws:ssm:${self:provider.region}:*:*
+
+    deploymentBucket:
+        name: ${self:service}
+        serverSideEncryption: AES256
+
+    environment:
+        GIT_BRANCH: ${git:branch}
+        GIT_SHA1: ${git:sha1}
+
+package:
+    individually: true
+    exclude:
+        - layers/**
+        - node_modules/**
+        - src/**
+        - '*'
+    include:
+        - src/_helpers.js
+
+functions:
+    auth-microsoft-get:
+        handler: src/auth/microsoft/get.handler
+        name: ${self:service}-${self:provider.stage}-auth-microsoft-get
+        description: Redirects user to auth in Microsoft
+        package:
+            include:
+                - src/auth/microsoft/get.js
+        layers:
+            - {Ref: CommonNodeLibsLambdaLayer}
+        events:
+            -
+                httpApi: GET /auth/microsoft
+
+    auth-microsoft-post:
+        handler: src/auth/microsoft/post.handler
+        name: ${self:service}-${self:provider.stage}-auth-microsoft-post
+        description: Handles return request from Microsoft auth
+        package:
+            include:
+                - src/auth/microsoft/post.js
+        layers:
+            - {Ref: CommonNodeLibsLambdaLayer}
+        events:
+            -
+                httpApi: POST /auth/microsoft
+
+layers:
+    commonNodeLibs:
+        path: layers
+        compatibleRuntimes:
+            - nodejs12.x
+
+plugins:
+    - serverless-plugin-git-variables
+
+custom:
+    exportGitVariables: false
