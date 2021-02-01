@@ -1,0 +1,28 @@
+type Tags @model @auth(rules: [{allow: private, operations: [read, create]}]) {
+  id: ID!
+  name: String!
+  skills: [Skills] @connection(keyName: "byTags", fields: ["id"])
+}
+
+type Skills @model @key(name: "byTags", fields: ["tagsID"]) @auth(rules: [{allow: private, operations: [read, create]}]) {
+  id: ID!
+  name: String!
+  users: [SkillsUsers] @connection(keyName: "bySkills", fields: ["id"])
+  tagsID: ID!
+}
+
+type Users @model @auth(rules: [{allow: private, operations: [read, create]}]) {
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  skills: [SkillsUsers] @connection(keyName: "byUsers", fields: ["id"])
+}
+
+type SkillsUsers @model(queries: null) @key(name: "bySkills", fields: ["skillsID", "usersID"]) @key(name: "byUsers", fields: ["usersID", "skillsID"]) @auth(rules: [{allow: private, operations: [read, create]}, {allow: private, operations: [read, create]}]) {
+  id: ID!
+  skillsID: ID!
+  usersID: ID!
+  skills: Skills! @connection(fields: ["skillsID"])
+  users: Users! @connection(fields: ["usersID"])
+}
+ 
