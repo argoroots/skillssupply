@@ -1,7 +1,7 @@
 {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "skillsdd469e38",
+    "resourceNameTruncated": "skills2efc10db",
     "userPoolName": "skillssupply",
     "autoVerifiedAttributes": [
         "email"
@@ -23,7 +23,9 @@
         "Requires Uppercase"
     ],
     "requiredAttributes": [
-        "email"
+        "email",
+        "family_name",
+        "given_name"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -33,9 +35,9 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "skillsdd469e38_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "skills2efc10db_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "dd469e38",
+    "sharedId": "2efc10db",
     "resourceName": "skillssupply",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
