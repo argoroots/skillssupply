@@ -22,7 +22,7 @@
     }
   },
   "auth": {
-    "skillssupply": {
+    "skillssupplybff53f4c": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "testAuthIdentityPool",
+    "identityPoolName": "skillssupplybff53f4c_identitypool_bff53f4c",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "skills9bd312d1",
-    "userPoolName": "skillssupply",
+    "resourceNameTruncated": "skillsbff53f4c",
+    "userPoolName": "skillssupplybff53f4c_userpool_bff53f4c",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -12,16 +12,11 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Forgot password code: {####}",
-    "emailVerificationMessage": "Forgot password code: {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
-    "passwordPolicyCharacters": [
-        "Requires Lowercase",
-        "Requires Numbers",
-        "Requires Symbols",
-        "Requires Uppercase"
-    ],
+    "passwordPolicyCharacters": [],
     "requiredAttributes": [
         "email"
     ],
@@ -33,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "skills9bd312d1_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "skillsbff53f4c_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "9bd312d1",
-    "resourceName": "skillssupply",
+    "sharedId": "bff53f4c",
+    "resourceName": "skillssupplybff53f4c",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -50,16 +45,12 @@
             "Arn"
         ]
     },
-    "serviceName": "Cognito",
+    "useDefault": "default",
     "usernameAttributes": [
         "email"
     ],
-    "useDefault": "manual",
-    "userPoolGroups": false,
     "userPoolGroupList": [],
-    "adminQueries": false,
-    "thirdPartyAuth": false,
-    "authProviders": [],
+    "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "dependsOn": []
 }
